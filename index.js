@@ -9,7 +9,7 @@ const VERIFY_TOKEN = 'dadbot123'; // you can change this to anything';
 const KNOWN_USERS = {
   '447885668209': 'Gracie',
   '447701073177': 'Sam',
-  '447809736254'; 'Boss Man'
+  '447809736254': 'Boss Man',
 };
 
 // Send a WhatsApp message
