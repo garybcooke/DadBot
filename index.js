@@ -6,6 +6,10 @@ app.use(express.json());
 const ACCESS_TOKEN = 'EAAWp1ceVqRcBRDzXYw59QVbUWfZAP6sAnG6oRPyszYvaGe8NUKkbsQYpitmyxsHp2J3AVBCL4h97ZAlYfwl9wo7RlHOTYAYZCEz6NsGZAjoFiMD1FQqVUn0YiJeZAeKgovKC5QZBhDl0kUouZAbdJeFmnBGUlHw8YlZBUjJ4SLr1ybjRAdVcKiFS2uFJYWxhgHY3awZDZD';
 const PHONE_NUMBER_ID = '1112246875295249';
 const VERIFY_TOKEN = 'dadbot123'; // you can change this to anything';
+const KNOWN_USERS = {
+  '447885668209': 'Gracie',
+  '447701073177': 'Sam'
+};
 
 // Send a WhatsApp message
 async function sendMessage(to, message) {
@@ -24,7 +28,7 @@ async function sendMessage(to, message) {
 }
 
 // Handle incoming messages
-function getReply(message) {
+function getReply(message, name) {
   const msg = message.toLowerCase();
 
   if (msg.includes('where are you') || msg.includes('where r u')) {
@@ -40,7 +44,7 @@ function getReply(message) {
     return "Nice try 😄 Ask me when I get home!";
   }
   if (msg.includes('help')) {
-    return "Hi! Dad Bot here 🤖 Try asking:\n• Where are you?\n• Training tonight?\n• What's for dinner?\n• Pocket money?";
+    return "Hey ${name}! Dad Bot here 🤖 Try asking:\n• Where are you?\n• Training tonight?\n• What's for dinner?\n• Pocket money?";
   }
 
   return "Hey! Dad Bot here 🤖 I didn't understand that — try asking 'help' to see what I can do!";
@@ -73,8 +77,9 @@ app.post('/webhook', async (req, res) => {
       const text = message.text.body;
       console.log(`Message from ${from}: ${text}`);
 
-      const reply = getReply(text);
-      await sendMessage(from, reply);
+      const name = KNOWN_USERS[from] || 'there';
+const reply = getReply(text, name);
+await sendMessage(from, reply);
     }
 
     res.sendStatus(200);
