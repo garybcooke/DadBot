@@ -8,7 +8,8 @@ const PHONE_NUMBER_ID = '1112246875295249';
 const VERIFY_TOKEN = 'dadbot123'; // you can change this to anything';
 const KNOWN_USERS = {
   '447885668209': 'Gracie',
-  '447701073177': 'Sam'
+  '447701073177': 'Sam',
+  '447809736254'; 'Boss Man'
 };
 
 // Send a WhatsApp message
@@ -44,7 +45,7 @@ function getReply(message, name) {
     return "Nice try 😄 Ask me when I get home!";
   }
   if (msg.includes('help')) {
-    return "Hey ${name}! Dad Bot here 🤖 Try asking:\n• Where are you?\n• Training tonight?\n• What's for dinner?\n• Pocket money?";
+    return `Hey ${name}! Dad Bot here 🤖 Try asking:\n• Where are you?\n• Training tonight?\n• What's for dinner?\n• Pocket money?`;
   }
 
   return "Hey! Dad Bot here 🤖 I didn't understand that — try asking 'help' to see what I can do!";
